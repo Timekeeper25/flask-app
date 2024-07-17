@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesioner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+
+               <h1 class="mt-5">Classification Predictor</h1>
+
+    <div class="card">
+            <div class="card-header">
+                Data Siswa
+            </div>
+            <div class="card-body">
+                <h2>Quesioner</h2>
+        <form method="POST" action="{{ url_for('quesioner') }}">
+            <div class="form-group">
+                <label for="nisn">NISN</label>
+                <input type="number" class="form-control" id="nisn" name="nisn" required>
+            </div>
+            <div class="form-group">
+                <label for="nama">Nama Siswa</label>
+                <input type="text" class="form-control" id="nama" name="nama" required>
+            </div>
+            <div class="form-group">
+                <label for="lp">L/P</label>
+                <select class="form-control" id="lp" name="lp" required>
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="minat">Minat</label>
+                <select class="form-control" id="minat" name="minat" required>
+                    <option value="Kepemimpinan">Kepemimpinan</option>
+                    <option value="Aktivitas Fisik dan Mengikuti Kompetisi">Aktivitas Fisik dan Mengikuti Kompetisi</option>
+                    <option value="Pelayanan Kemanusiaan">Pelayanan Kemanusiaan</option>
+                    <option value="Bermusik dan Tampil di Publik">Bermusik dan Tampil di publik</option>
+                    <option value="Belajar Budaya Lokal">Belajar Budaya Lokal</option>
+                    <option value="Petualangan dan Kerja Tim">Petualangan dan Kerja Tim</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bakat">Bakat</label>
+                <select class="form-control" id="bakat" name="bakat" required>
+                    <option value="Pengaturan Formasi di Paskibra">Pengaturan Formasi di Paskibra</option>
+                    <option value="Berbagai Macam Olahraga">Berbagai Macam Olahraga</option>
+                    <option value="Merawat dan Memberikan Pertolongan kepada Orang yang Membutuhkan">Merawat dan Memberikan Pertolongan kepada Orang yang Membutuhkan</option>
+                    <option value="Bangun Perkemahan dan Inisiatif dalam Kegiatan Outdoor">Bangun Perkemahan dan Inisiatif dalam Kegiatan Outdoor</option>
+                    <option value="Memainkan Instrumen Musik">Memainkan Instrumen Musik</option>
+                    <option value="Memainkan Instrumen Tradisional">Memainkan Instrumen Tradisional</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="hobi">Hobi</label>
+                <select class="form-control" id="hobi" name="hobi" required>
+                    <option value="Menonton film">Menonton film</option>
+                    <option value="Menyanyi atau bermain musik">Menyanyi atau bermain musik</option>
+                    <option value="Bermain game">Bermain game</option>
+                    <option value="Olahraga">Olahraga</option>
+                    <option value="Menulis">Menulis</option>
+                    <option value="Fotografi">Fotografi</option>
+                    <option value="Membaca">Membaca</option>
+                    <option value="Melukis atau menggambar">Melukis atau menggambar</option>
+                    <option value="Memasak">Memasak</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+            {% if error_message %}
+            <br>
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+            {% endif %}
+            </div>
+        </div>
+        </div>
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block title %} Dashboard {% endblock %}
+
+        {% block content %}
+<h1 class="m-0 text-dark">Dashboard</h1>
+
+<!-- /.col -->
+<div class="col-md-3 col-sm-6 col-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-success"><i class="fas fa-signal"></i></span>
+
+      <div class="info-box-content">
+        <span class="info-box-text">Dataset RAW</span>
+        <span class="info-box-number"></span>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+  </div>
+  <!-- /.col -->
+  
+<!--
+<div class="callout callout-info">
+  <h5><i class="fas fa-info"></i> Note:</h5>
+  Data dapat diubah dengan mengakses file ekstensi .csv pada folder local komputer sistem analisis ini.
+</div>
+-->
+<!--
+<p>Format File dapat di Download disini <a href="static/dataset/format.csv" target="_blank">Disini</a></p>
+<form action="{{ url_for('dashboard') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="filedata"
+            accept=".csv">
+        <input type="submit" value="Upload">
+    </form>
+-->
+
+<div class='table-responsive'><table class='table table-striped table-bordered table-hover mt-2'>
+    <tr>
+        {% for col in column_names %}
+        <th>{{col}}</th>
+        {% endfor %}
+    </tr>
+    {% for row in row_data %}
+    <tr>
+        {% for col, row_ in zip(column_names, row) %}
+        {% if col == link_column %}
+        <td>
+            <button type="submit" value={{ row_ }} name="person_id" form="patient_form" class="patient_button">
+                {{ row_ }}
+            </button>
+        </td>
+        {% else %}
+        <td>{{row_}}</td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+</table></div>
+
+
+        {% endblock %}

@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Predict Ekstrakurikuler</h1>
+    <div class="card">
+        <div class="card-body">
+            <form id="predict-form">
+                <div class="form-group">
+                    <label for="tahun">Tahun Yang Ingin Diprediksi:</label>
+                    <select id="tahun" name="tahun" class="form-control">
+                        {% for option in tahun_options %}
+                            <option value="{{ option }}">{{ option }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="result" class="table table-striped table-bordered table-hover mt-2"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#predict-form').on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/predict',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response){
+                    console.log('Response received:', response);  // Debugging: Log the response to the console
+                    if (response.error) {
+                        $('#result').html('<div class="alert alert-danger">' + response.error + '</div>');
+                    } else {
+                        let table = '<div class="table-responsive"><table class="table table-striped table-bordered table-hover mt-2">';
+                        table += '<thead><tr>';
+                        response.column_names.forEach(function(col) {
+                            table += '<th>' + col + '</th>';
+                        });
+                        table += '</tr></thead><tbody>';
+                        response.row_data.forEach(function(row) {
+                            table += '<tr>';
+                            row.forEach(function(cell) {
+                                table += '<td>' + cell + '</td>';
+                            });
+                            table += '</tr>';
+                        });
+                        table += '</tbody></table></div>';
+                        $('#result').html(table);
+                        console.log('Table constructed:', table);  // Debugging: Log the constructed table
+                    }
+                },
+                error: function(error){
+                    console.log('AJAX error:', error);  // Debugging: Log the error to the console
+                    $('#result').html('<div class="alert alert-danger">An error occurred while processing your request.</div>');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

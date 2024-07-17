@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %} Dashboard {% endblock %}
+
+        {% block content %}
+<h1 class="m-0 text-dark">Performance</h1>
+<div class='table-responsive'><table class='table table-striped table-bordered table-hover'>
+    <tr><th>No</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1-Score</th></tr>
+
+    {% for dict_item in performance %}
+        <!-- <tr><td>{{loop.index}}</td><td>{{dict_item['n']}}</td><td>{{dict_item['metric']}}</td><td>{{dict_item['accuracy']}}</td><td><img src="static/images/cm_{{dict_item['metric']}}{{dict_item['n']}}.png" width="360px" class="zoomable-image"></td><td><pre>{{dict_item['report']|safe}}</pre></td></tr> -->
+    <tr><td>{{loop.index}}</td><td>{{dict_item['accuracy']}}</td><td>{{dict_item['precision']}}</td><td>{{dict_item['recall']}}</td><td>{{dict_item['f1_score']}}</td></tr>
+    {% endfor %}
+</table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Menangkap gambar dengan kelas zoomable-image
+        var zoomableImage = $(".zoomable-image");
+
+        // Menambahkan event listener ketika mouse masuk ke gambar
+        zoomableImage.on("mouseenter", function() {
+            // Memperbesar gambar 100%
+            $(this).css("transform", "scale(2.0)");
+        });
+
+        // Menambahkan event listener ketika mouse keluar dari gambar
+        zoomableImage.on("mouseleave", function() {
+            // Mengembalikan gambar ke ukuran aslinya
+            $(this).css("transform", "scale(1.0)");
+        });
+    });
+</script>
+        {% endblock %}
